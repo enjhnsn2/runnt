@@ -1,5 +1,7 @@
 use std::fmt::Display;
-#[derive(Clone)]
+
+use serde::{Deserialize, Serialize};
+#[derive(Clone, Serialize, Deserialize)]
 pub enum Regularization {
     None,
     L1(f32),

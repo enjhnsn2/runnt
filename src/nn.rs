@@ -5,6 +5,8 @@ use std::time::Instant;
 
 use ndarray::prelude::*;
 use ndarray::Array;
+use serde::Deserialize;
+use serde::Serialize;
 
 use crate::activation::{activate, activate_der, ActivationType};
 use crate::dataset::Dataset;
@@ -32,7 +34,7 @@ use crate::regularization::Regularization;
 ///    assert_eq!(nn.forward(&[1., 0.]).first().unwrap().round(), 1.);
 ///    assert_eq!(nn.forward(&[1., 1.]).first().unwrap().round(), 0.);
 ///```
-#[derive(Clone)]
+#[derive(Clone, Serialize, Deserialize)]
 pub struct NN {
     weights: Vec<Array2<f32>>, // layer * 2D matrix e.g. [2x2], [2x1]
     bias: Vec<Array2<f32>>,    //layer * 2D matrix
