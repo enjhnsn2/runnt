@@ -538,7 +538,6 @@ impl NN {
                     .split(';')
                     .map(|f| f.parse::<f32>().unwrap_or_default())
                     .collect::<Vec<f32>>();
-                let bb = bb;
                 let bb = Array2::from_shape_vec([1, bb.len()], bb).expect("Shape is wrong for vec");
 
                 biases.push(bb);
