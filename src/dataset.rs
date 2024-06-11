@@ -82,8 +82,8 @@ impl Dataset {
         inp.into_iter().zip(out).collect()
     }
 
-    fn get_shuffled_data(data: &'_ Vec<(Inputs, Targets)>) -> (Vec<&'_ Inputs>, Vec<&'_ Targets>) {
-        let mut indices = (0..data.len()).into_iter().collect::<Vec<_>>();
+    fn get_shuffled_data(data: &'_ [(Inputs, Targets)]) -> (Vec<&'_ Inputs>, Vec<&'_ Targets>) {
+        let mut indices = (0..data.len()).collect::<Vec<_>>();
         fastrand::shuffle(&mut indices);
         let mut vecin = vec![];
         let mut vectar = vec![];
@@ -241,7 +241,7 @@ impl DatasetBuilder {
     pub fn allocate_to_test_data(mut self, ratio: f32) -> Self {
         let count = (self.data.len() as f32 * ratio) as usize;
         assert!(count > 0, "Not enough data to allocate to test data");
-        let mut indices = (0..self.data.len()).into_iter().collect::<Vec<_>>();
+        let mut indices = (0..self.data.len()).collect::<Vec<_>>();
         fastrand::shuffle(&mut indices);
         let mut indices: Vec<usize> = indices.iter().take(count).copied().collect();
         indices.sort_unstable();
@@ -341,13 +341,11 @@ impl DatasetBuilder {
         let data = traininputs
             .into_iter()
             .zip(traintargets)
-            .map(|(i, o)| (i, o))
             .collect();
 
         let test_data = testinputs
             .into_iter()
             .zip(testtargets)
-            .map(|(i, o)| (i, o))
             .collect();
 
         Dataset {

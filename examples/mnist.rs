@@ -91,7 +91,6 @@ fn get_train_test(
     let mut test_image_path = PathBuf::from("");
     std::fs::read_dir(path)
         .expect("Could not find mnist folder")
-        .into_iter()
         .for_each(|f| {
             if let Ok(ref fi) = f {
                 match fi
