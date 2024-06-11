@@ -1,5 +1,5 @@
 use std::fmt::Display;
-
+#[derive(Clone)]
 pub enum Regularization {
     None,
     L1(f32),
